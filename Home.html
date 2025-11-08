@@ -1,0 +1,1280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Abdul’s Portfolio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    /* ===== CSS VARIABLES ===== */
+    :root {
+      /* Light theme colors */
+      --primary: #7c3aed;
+      --primary-dark: #5b21b6;
+      --primary-light: #a78bfa;
+      --secondary: #10b981;
+      --accent: #f59e0b;
+      --text: #1e293b;
+      --text-light: #64748b;
+      --bg: #f8fafc;
+      --bg-card: #ffffff;
+      --bg-alt: #f1f5f9;
+      --border: #e2e8f0;
+      --shadow: rgba(0, 0, 0, 0.08);
+      --shadow-hover: rgba(0, 0, 0, 0.12);
+      
+      /* Typography */
+      --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      --font-heading: 'Poppins', sans-serif;
+      
+      /* Spacing */
+      --section-padding: 80px 0;
+      --container-padding: 0 20px;
+      --card-radius: 16px;
+      --btn-radius: 8px;
+      
+      /* Transitions */
+      --transition: all 0.3s ease;
+    }
+
+    /* Dark theme colors */
+    .dark-mode {
+      --primary: #8b5cf6;
+      --primary-dark: #7c3aed;
+      --primary-light: #a78bfa;
+      --secondary: #10b981;
+      --accent: #f59e0b;
+      --text: #f1f5f9;
+      --text-light: #cbd5e1;
+      --bg: #0f172a;
+      --bg-card: #1e293b;
+      --bg-alt: #1e293b;
+      --border: #334155;
+      --shadow: rgba(0, 0, 0, 0.25);
+      --shadow-hover: rgba(0, 0, 0, 0.35);
+    }
+
+    /* ===== BASE STYLES ===== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-main);
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      transition: var(--transition);
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: var(--font-heading);
+      font-weight: 600;
+      line-height: 1.3;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+      transition: var(--transition);
+    }
+
+    button {
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    section {
+      padding: var(--section-padding);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: var(--container-padding);
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 50px;
+      position: relative;
+    }
+
+    .section-title::after {
+      content: "";
+      display: block;
+      width: 70px;
+      height: 4px;
+      background: var(--primary);
+      margin: 12px auto 0;
+      border-radius: 2px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 26px;
+      border-radius: var(--btn-radius);
+      font-weight: 600;
+      text-align: center;
+      transition: var(--transition);
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px var(--shadow-hover);
+    }
+
+    .btn-secondary {
+      background-color: var(--bg-alt);
+      color: var(--text);
+    }
+
+    .btn-secondary:hover {
+      background-color: var(--border);
+      transform: translateY(-3px);
+    }
+
+    .card {
+      background-color: var(--bg-card);
+      border-radius: var(--card-radius);
+      box-shadow: 0 6px 18px var(--shadow);
+      transition: var(--transition);
+      overflow: hidden;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 25px var(--shadow-hover);
+    }
+
+    /* ===== NAVBAR ===== */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: var(--bg-card);
+      padding: 20px 40px;
+      box-shadow: 0 4px 12px var(--shadow);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      transition: var(--transition);
+    }
+
+    .nav_left p {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin: 0;
+    }
+
+    .nav_right {
+      display: flex;
+      gap: 25px;
+      align-items: center;
+    }
+
+    .nav_right a {
+      font-weight: 500;
+      font-size: 1.05rem;
+      position: relative;
+    }
+
+    .nav_right a::after {
+      content: "";
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: var(--primary);
+      transition: var(--transition);
+    }
+
+    .nav_right a:hover {
+      color: var(--primary);
+    }
+
+    .nav_right a:hover::after {
+      width: 100%;
+    }
+
+    /* 🌗 Toggle Switch */
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 60px;
+      height: 32px;
+    }
+
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: var(--bg-alt);
+      border: 2px solid var(--border);
+      border-radius: 50px;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .slider::before {
+      position: absolute;
+      content: "";
+      height: 22px;
+      width: 22px;
+      left: 3px;
+      bottom: 3px;
+      background-color: var(--primary);
+      border-radius: 50%;
+      transition: var(--transition);
+    }
+
+    .icon {
+      position: relative;
+      z-index: 1;
+      font-size: 14px;
+    }
+
+    input:checked + .slider {
+      background-color: var(--primary);
+      border-color: var(--primary);
+    }
+
+    input:checked + .slider::before {
+      transform: translateX(26px);
+      background-color: white;
+    }
+
+    /* ===== HOME SECTION ===== */
+    .home_section {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 60px;
+      padding: 100px 40px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .home_content {
+      flex: 1;
+      max-width: 600px;
+      animation: fadeInUp 1s ease-in-out;
+    }
+
+    .home_content .intro {
+      font-size: 1.2rem;
+      color: var(--text-light);
+      margin-bottom: 5px;
+    }
+
+    .home_content h1 {
+      font-size: 3rem;
+      color: var(--text);
+      margin-bottom: 10px;
+      line-height: 1.2;
+    }
+
+    .home_content .name {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin: 10px 0;
+    }
+
+    .home_content .role {
+      font-weight: 600;
+      color: var(--text-light);
+      font-size: 1.3rem;
+      margin-bottom: 20px;
+    }
+
+    .home_content .about {
+      color: var(--text-light);
+      line-height: 1.7;
+      margin-bottom: 15px;
+    }
+
+    .home_btn {
+      display: flex;
+      gap: 15px;
+      margin: 25px 0;
+    }
+
+    .icon_div {
+      margin-top: 30px;
+      display: flex;
+      gap: 20px;
+          margin-left: 100px;
+    }
+
+    .icon_div a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      background-color: var(--bg-alt);
+      color: var(--primary);
+      font-size: 1.3rem;
+      transition: var(--transition);
+    }
+
+    .icon_div a:hover {
+      background-color: var(--primary);
+      color: white;
+      transform: translateY(-3px);
+    }
+
+    .home_picture {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .home_picture img {
+      width: 340px;
+      height: 340px;
+      object-fit: cover;
+      border-radius: 50%;
+      box-shadow: 0 15px 35px var(--shadow);
+      animation: float 3s ease-in-out infinite;
+      border: 5px solid var(--primary-light);
+    }
+
+    /* Typing Effect */
+    .role #typing {
+      font-weight: 600;
+      color: var(--primary);
+      border-right: 3px solid var(--primary);
+      white-space: nowrap;
+      overflow: hidden;
+      font-size: 1.3rem;
+      padding-right: 5px;
+    }
+
+    /* ===== ABOUT SECTION ===== */
+    .About {
+      background-color: var(--bg-alt);
+    }
+
+    .about_content {
+      position: relative;
+      background-color: var(--bg-card);
+      padding: 40px 40px 40px 60px;
+      border-radius: var(--card-radius);
+      box-shadow: 0 10px 25px var(--shadow);
+      max-width: 900px;
+      margin: 0 auto;
+      transition: var(--transition);
+    }
+
+    .about_content::before {
+      content: "";
+      position: absolute;
+      left: 20px;
+      top: 30px;
+      height: calc(100% - 60px);
+      width: 4px;
+      background-color: var(--primary);
+      border-radius: 2px;
+    }
+
+    .about_content h2 {
+      font-size: 1.5rem;
+      color: var(--text);
+      margin-bottom: 5px;
+    }
+
+    .about_content h4 {
+      font-size: 1.3rem;
+      color: var(--primary);
+      margin: 5px 0 10px;
+    }
+
+    .about_content p {
+      font-weight: 500;
+      color: var(--text-light);
+      margin-bottom: 20px;
+    }
+
+    .about-list {
+      list-style: none;
+      padding-left: 0;
+      margin-bottom: 25px;
+    }
+
+    .about-list li {
+      position: relative;
+      padding-left: 30px;
+      margin-bottom: 12px;
+      color: var(--text);
+      line-height: 1.6;
+      font-size: 1rem;
+    }
+    #bbb{
+          padding-left: 70px;
+    padding-right: 70px;
+    }
+
+    .about-list li::before {
+      content: "▹";
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: var(--primary);
+      font-weight: bold;
+    }
+
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .skill-tags button {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      transition: var(--transition);
+    }
+
+    .skill-tags button:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+    }
+
+    /* ===== SKILLS SECTION ===== */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 25px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .skill {
+      background: var(--bg-card);
+      border-radius: var(--card-radius);
+      padding: 30px 15px;
+      box-shadow: 0 6px 18px var(--shadow);
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .skill:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 25px var(--shadow-hover);
+    }
+
+    .skill i {
+      font-size: 2.5rem;
+      color: var(--primary);
+      margin-bottom: 15px;
+    }
+
+    .skill span {
+      font-weight: 500;
+      font-size: 1rem;
+      color: var(--text);
+    }
+
+    /* ===== CONTACT SECTION ===== */
+    .contact {
+      background-color: var(--bg-alt);
+    }
+
+    .contact-container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .contact h2 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+      color: var(--text);
+    }
+
+    .contact p {
+      color: var(--text-light);
+      margin-bottom: 40px;
+    }
+
+    .contact-info {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      margin-bottom: 40px;
+      gap: 20px;
+    }
+
+    .info-item {
+      text-align: center;
+      padding: 20px;
+      background-color: var(--bg-card);
+      border-radius: var(--card-radius);
+      box-shadow: 0 5px 15px var(--shadow);
+      transition: var(--transition);
+      flex: 1;
+      min-width: 200px;
+    }
+
+    .info-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px var(--shadow-hover);
+    }
+
+    .info-item i {
+      font-size: 2rem;
+      color: var(--primary);
+      margin-bottom: 15px;
+    }
+
+    .info-item p {
+      margin: 0;
+      color: var(--text);
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      background-color: var(--bg-card);
+      padding: 30px;
+      border-radius: var(--card-radius);
+      box-shadow: 0 10px 25px var(--shadow);
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      padding: 15px;
+      border-radius: var(--btn-radius);
+      border: 1px solid var(--border);
+      font-size: 1rem;
+      font-family: inherit;
+      background-color: var(--bg);
+      color: var(--text);
+      transition: var(--transition);
+    }
+
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1);
+    }
+
+    .contact-form button {
+      padding: 15px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: white;
+      font-size: 1rem;
+      border: none;
+      border-radius: var(--btn-radius);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .contact-form button:hover {
+      background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px var(--shadow-hover);
+    }
+
+    /* ===== CHATBOT ===== */
+    .chatbot-toggle {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      cursor: pointer;
+      font-size: 1.5rem;
+      box-shadow: 0 6px 20px var(--shadow-hover);
+      transition: var(--transition);
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .chatbot-toggle:hover {
+      transform: scale(1.1);
+      background: var(--primary-dark);
+    }
+
+    .chatbot-container {
+      position: fixed;
+      bottom: 90px;
+      right: 25px;
+      width: 320px;
+      background: var(--bg-card);
+      border-radius: var(--card-radius);
+      box-shadow: 0 10px 30px var(--shadow-hover);
+      display: none;
+      flex-direction: column;
+      overflow: hidden;
+      z-index: 1000;
+      border: 1px solid var(--border);
+    }
+
+    .chatbot-header {
+      background: var(--primary);
+      color: white;
+      padding: 15px 20px;
+      font-weight: 600;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .chatbot-header button {
+      background: transparent;
+      border: none;
+      color: white;
+      font-size: 1.3rem;
+      cursor: pointer;
+    }
+
+    .chatbot-body {
+      padding: 15px;
+      height: 280px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      background: var(--bg);
+    }
+
+    .bot-message,
+    .user-message {
+      max-width: 85%;
+      padding: 10px 15px;
+      border-radius: 18px;
+      line-height: 1.4;
+      font-size: 0.9rem;
+    }
+
+    .bot-message {
+      background: var(--bg-alt);
+      align-self: flex-start;
+      border-bottom-left-radius: 5px;
+    }
+
+    .user-message {
+      background: var(--primary);
+      color: white;
+      align-self: flex-end;
+      border-bottom-right-radius: 5px;
+    }
+
+    .chatbot-footer {
+      display: flex;
+      border-top: 1px solid var(--border);
+      background: var(--bg-card);
+    }
+
+    #chatInput {
+      flex: 1;
+      border: none;
+      padding: 15px;
+      font-size: 0.9rem;
+      outline: none;
+      background: var(--bg-card);
+      color: var(--text);
+    }
+
+    #sendBtn {
+      background: var(--primary);
+      border: none;
+      color: white;
+      padding: 0 20px;
+      cursor: pointer;
+      font-size: 1.1rem;
+      transition: var(--transition);
+    }
+
+    #sendBtn:hover {
+      background: var(--primary-dark);
+    }
+
+    /* ===== SCROLL TO TOP ===== */
+    #scrollTopBtn {
+      display: none;
+      position: fixed;
+      bottom: 90px;
+      left: 25px;
+      z-index: 100;
+      font-size: 1.3rem;
+      background-color: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      cursor: pointer;
+      box-shadow: 0 4px 12px var(--shadow);
+      transition: var(--transition);
+    }
+
+    #scrollTopBtn:hover {
+      background-color: var(--primary-dark);
+      transform: translateY(-3px);
+    }
+
+    /* ===== ANIMATIONS ===== */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-12px);
+      }
+    }
+
+    /* ===== RESPONSIVE DESIGN ===== */
+    @media (max-width: 992px) {
+      .home_section {
+        flex-direction: column-reverse;
+        text-align: center;
+        gap: 50px;
+        padding: 80px 20px;
+      }
+
+      .home_btn {
+        justify-content: center;
+      }
+
+      .nav_right {
+        gap: 15px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        flex-direction: column;
+        padding: 15px 20px;
+        gap: 15px;
+      }
+
+      .nav_left p {
+        font-size: 1.5rem;
+      }
+
+      .nav_right {
+        width: 100%;
+        justify-content: space-between;
+        flex-wrap: wrap;
+      }
+
+      .home_content h1 {
+        font-size: 2.2rem;
+      }
+
+      .home_content .name {
+        font-size: 2rem;
+      }
+
+      .home_picture img {
+        width: 260px;
+        height: 260px;
+      }
+
+      .section-title {
+        font-size: 2rem;
+      }
+
+      .about_content {
+        padding: 30px 25px 30px 45px;
+      }
+
+      .about_content::before {
+        left: 15px;
+      }
+
+      .contact-info {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .info-item {
+        width: 100%;
+        max-width: 300px;
+      }
+
+      .skills-grid {
+        grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      }
+
+      .chatbot-container {
+        width: 280px;
+        right: 15px;
+      }
+
+      #scrollTopBtn {
+        left: 15px;
+        bottom: 100px;
+      }
+         .icon_div{
+    margin-left: 167px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .home_section {
+        padding: 60px 15px;
+      }
+
+      .home_content h1 {
+        font-size: 1.8rem;
+      }
+
+      .home_content .name {
+        font-size: 1.6rem;
+      }
+
+      .home_btn {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .home_picture img {
+        width: 220px;
+        height: 220px;
+      }
+
+      .section-title {
+        font-size: 1.8rem;
+      }
+
+      .skills-grid {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: 15px;
+      }
+
+      .skill {
+        padding: 20px 10px;
+      }
+
+      .skill i {
+        font-size: 2rem;
+      }
+   
+    }
+  </style>
+</head>
+
+<body>
+  <div class="Maindiv">
+    <!-- ///////navbar -->
+    <nav>
+      <div class="nav_left">
+        <p>Abdul's Portfolio</p>
+      </div>
+
+      <div class="nav_right">
+        <a href="#Home">Home</a>
+        <a href="#about">About</a>
+        <a href="#Skills">Skills</a>
+        <a href="#contact">Contact</a>
+
+        <!-- 🌙 Toggle Button -->
+        <label class="switch">
+          <input type="checkbox" id="theme-toggle" />
+          <span class="slider">
+            <span class="icon">🌞</span>
+          </span>
+        </label>
+      </div>
+    </nav>
+
+    <!-- ///////////Homesection -->
+    <section class="home_section" id="Home">
+      <div class="home_content">
+        <p class="intro">Hey! I'm</p>
+        <h2 class="name">Abdul Kalam</h2>
+        <p class="role"><span id="typing"></span></p>
+
+        <p class="about">
+          I am a skilled software developer delivering high-quality and efficient web solutions across multiple projects.
+          My expertise spans front-end and back-end development, including <b>Angular</b>, <b>TypeScript</b>, 
+          <b>ASP.NET Core Web API</b>, <b>ASP.NET MVC</b>, and <b>SQL</b>.
+        </p>
+
+        <p class="about">
+          I specialize in building responsive interfaces and scalable backend systems using <b>HTML</b>, <b>CSS</b>, 
+          <b>JavaScript</b>, and <b>.NET Core</b>. Passionate about clean architecture and Agile methodology, 
+          I focus on delivering reliable, maintainable solutions.
+        </p>
+
+        <a href="#about" id="bbb" class="btn btn-primary">Learn More About Me</a>
+
+        <div class="home_btn">
+          <a href="kalamresumeword.pdf" download class="btn btn-primary">View Resume</a>
+          <a href="#contact" class="btn btn-secondary">Contact Info</a>
+        </div>
+
+        <div class="icon_div">
+          <a href="https://github.com/kalam003"><i class="fab fa-github"></i></a>
+          <a href="https://www.linkedin.com/in/abdulkalam-a-95975b264/"><i class="fab fa-linkedin"></i></a>
+        </div>
+      </div>
+
+      <div class="home_picture">
+        <img src="kalamprofessionpic.png" alt="My Profile Picture" />
+      </div>
+    </section>
+
+    <section class="About" id="about">
+      <div class="container">
+        <h1 class="section-title">About Me</h1>
+        <div class="about_content">
+          <h2>Experience - 2+ year(s)</h2>
+          <h4>Full Stack Developer</h4>
+          <p>Jeanuvs Pvt Limited</p>
+          <ul class="about-list">
+            <li>Skilled in HTML, CSS, JavaScript, jQuery, and Angular 17 (TypeScript).</li>
+            <li>Experienced in ASP.NET Core Web API, MVC Core, .NET Framework, and Web Forms.</li>
+            <li>Strong knowledge of SQL Server, Entity Framework, and Dapper for backend data handling.</li>
+            <li>Familiar with Agile methodology, version control (GitHub), and REST API integration.</li>
+          </ul>
+          <div class="skill-tags">
+            <button>Html</button>
+            <button>Css</button>
+            <button>Javascript</button>
+            <button>Jquery</button>
+            <button>.Net Framework</button>
+            <button>.Net Core</button>
+            <button>Angular 17</button>
+            <button>SQL</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="Practicalskills" id="Skills">
+      <div class="container">
+        <h1 class="section-title">Practical Skills</h1>
+        <div class="skills-grid">
+          <div class="skill"><i class="fa-brands fa-html5"></i><span>HTML</span></div>
+          <div class="skill"><i class="fa-brands fa-css3-alt"></i><span>CSS</span></div>
+          <div class="skill"><i class="fa-brands fa-js"></i><span>JavaScript</span></div>
+          <div class="skill"><i class="fa-solid fa-code"></i><span>jQuery</span></div>
+          <div class="skill"><i class="fa-solid fa-laptop-code"></i><span>ASP.NET Framework</span></div>
+          <div class="skill"><i class="fa-solid fa-globe"></i><span>ASP.NET Core Web API</span></div>
+          <div class="skill"><i class="fa-solid fa-server"></i><span>ASP.NET MVC Core</span></div>
+          <div class="skill"><i class="fa-solid fa-database"></i><span>SQL</span></div>
+          <div class="skill"><i class="fa-brands fa-github"></i><span>GitHub</span></div>
+          <div class="skill"><i class="fa-brands fa-angular"></i><span>Angular 17</span></div>
+          <div class="skill"><i class="fa-brands fa-js"></i><span>TypeScript</span></div>
+          <div class="skill"><i class="fa-solid fa-diagram-project"></i><span>Dapper</span></div>
+          <div class="skill"><i class="fa-solid fa-database"></i><span>Entity Framework</span></div>
+          <div class="skill"><i class="fa-solid fa-code-branch"></i><span>LINQ</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ///////contact -->
+    <section class="contact" id="contact">
+      <div class="container">
+        <h2 class="section-title">Contact Me</h2>
+        <p>If you'd like to get in touch, feel free to send me a message below.</p>
+
+        <div class="contact-info">
+          <div class="info-item">
+            <i class="fa fa-user"></i>
+            <p><strong>Name:</strong> Abdul Kalam</p>
+          </div>
+          <div class="info-item">
+            <i class="fa fa-envelope"></i>
+            <p><strong>Email:</strong> developerabdul003@gmail.com</p>
+          </div>
+          <div class="info-item">
+            <i class="fa fa-phone"></i>
+            <p><strong>Phone:</strong> +91 91508 47686</p>
+          </div>
+        </div>
+
+        <form class="contact-form">
+          <input type="text" name="name" placeholder="Your Name" required>
+          <input type="email" name="_replyto" placeholder="Your Email" required>
+          <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+          <button type="submit">Send Message</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Chatbot -->
+    <div class="chatbot-container">
+      <div class="chatbot-header" id="chatbotHeader">
+        <span>💬 Chat with Me</span>
+        <button id="closeChat">&times;</button>
+      </div>
+
+      <div class="chatbot-body" id="chatbotBody">
+        <div class="bot-message">Hi there! 👋 How can I help you today?</div>
+      </div>
+
+      <div class="chatbot-footer">
+        <input type="text" id="chatInput" placeholder="Type a message..." />
+        <button id="sendBtn"><i class="fa-solid fa-paper-plane"></i></button>
+      </div>
+    </div>
+
+    <!-- Floating Button -->
+    <button class="chatbot-toggle" id="chatbotToggle">
+      <i class="fa-solid fa-comments"></i>
+    </button>
+  </div>
+
+  <!-- Scroll to Top Button -->
+  <button id="scrollTopBtn" title="Go to top">
+    ↑
+  </button>
+
+  <!-- JavaScript -->
+  <script>
+    // Scroll to Top Button
+    const scrollTopBtn = document.getElementById("scrollTopBtn");
+
+    window.onscroll = function() {
+      if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+        scrollTopBtn.style.display = "block";
+      } else {
+        scrollTopBtn.style.display = "none";
+      }
+    };
+
+    scrollTopBtn.addEventListener("click", function() {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    // Theme Toggle
+    const toggleBtn = document.getElementById('theme-toggle');
+    const body = document.body;
+    const icon = document.querySelector('.icon');
+
+    toggleBtn.addEventListener('change', () => {
+      body.classList.toggle('dark-mode');
+
+      if (body.classList.contains('dark-mode')) {
+        icon.textContent = '🌙';
+      } else {
+        icon.textContent = '🌞';
+      }
+
+      // Save theme
+      const theme = body.classList.contains('dark-mode') ? 'dark' : 'light';
+      localStorage.setItem('theme', theme);
+    });
+
+    // Load saved theme
+    if (localStorage.getItem('theme') === 'dark') {
+      body.classList.add('dark-mode');
+      toggleBtn.checked = true;
+      icon.textContent = '🌙';
+    }
+
+    // Typing Animation
+    const roles = ["Full Stack Developer"];
+    let roleIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    const typingElement = document.getElementById("typing");
+
+    function typeEffect() {
+      const currentRole = roles[roleIndex];
+      typingElement.textContent = currentRole.substring(0, charIndex);
+
+      if (!isDeleting && charIndex < currentRole.length) {
+        charIndex++;
+        setTimeout(typeEffect, 120);
+      } else if (isDeleting && charIndex > 0) {
+        charIndex--;
+        setTimeout(typeEffect, 60);
+      } else {
+        isDeleting = !isDeleting;
+        if (!isDeleting) roleIndex = (roleIndex + 1) % roles.length;
+        setTimeout(typeEffect, 1000);
+      }
+    }
+
+    typeEffect();
+
+    // Chatbot
+    const chatbotToggle = document.getElementById('chatbotToggle');
+    const chatbotContainer = document.querySelector('.chatbot-container');
+    const closeChat = document.getElementById('closeChat');
+    const sendBtn = document.getElementById('sendBtn');
+    const chatInput = document.getElementById('chatInput');
+    const chatBody = document.getElementById('chatbotBody');
+
+    chatbotToggle.addEventListener('click', () => {
+      chatbotContainer.style.display = 'flex';
+      chatbotToggle.style.display = 'none';
+    });
+
+    closeChat.addEventListener('click', () => {
+      chatbotContainer.style.display = 'none';
+      chatbotToggle.style.display = 'block';
+    });
+
+    sendBtn.addEventListener('click', sendMessage);
+    chatInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') sendMessage();
+    });
+
+    function sendMessage() {
+      const message = chatInput.value.trim();
+      if (message === '') return;
+
+      addMessage(message, 'user');
+      chatInput.value = '';
+
+      setTimeout(() => {
+        const response = getBotResponse(message.toLowerCase());
+        addMessage(response, 'bot');
+      }, 600);
+    }
+
+    function addMessage(text, sender) {
+      const msg = document.createElement('div');
+      msg.classList.add(sender === 'bot' ? 'bot-message' : 'user-message');
+      msg.textContent = text;
+      chatBody.appendChild(msg);
+      chatBody.scrollTop = chatBody.scrollHeight;
+    }
+
+    function getBotResponse(input) {
+      input = input.toLowerCase();
+
+      if (input.match(/hello|hi|hey|good (morning|evening|afternoon)/)) {
+        return "Hey there! 👋 I'm Abdul Kalam's assistant. How can I help you today?";
+      }
+
+      if (input.match(/who (are|r) you|about abdul|about you|yourself/)) {
+        return "I'm Abdul Kalam's virtual assistant 🤖 — here to tell you about his experience, skills, and projects!";
+      }
+
+      if (input.match(/experience|work history|career/)) {
+        return "Abdul Kalam has over 2 years of experience as a Full Stack Developer at Jeanuvs Pvt Ltd, focusing on ASP.NET Core Web API, Angular, and SQL.";
+      }
+
+      if (input.match(/skills|tech stack|technologies|tools|frameworks/)) {
+        return "He's skilled in Angular 17, ASP.NET Core, Web API, SQL, Entity Framework, Dapper, HTML, CSS, JavaScript, jQuery, and GitHub.";
+      }
+
+      if (input.match(/frontend|ui|angular|typescript/)) {
+        return "He's currently mastering Angular 17 — working with standalone components, reactive forms, and API integrations.";
+      }
+
+      if (input.match(/backend|api|dotnet|web api|asp\.net|mvc/)) {
+        return "Abdul is experienced in ASP.NET Core Web API, MVC, Dapper, and Entity Framework — building scalable backend services.";
+      }
+
+      if (input.match(/sql|database|query|stored procedure|data/)) {
+        return "He's proficient in SQL — writing joins, triggers, stored procedures, and optimizing queries for performance.";
+      }
+
+      if (input.match(/project|portfolio|applications|work sample/)) {
+        return "Here are Abdul's key projects:\n\n• Employee Management System – Angular + .NET Core API\n• Notification Module – Reactive Forms & modals in Angular\n• Company Management API – Full CRUD backend with Angular frontend.";
+      }
+
+      if (input.match(/learning|studying|currently learning|training/)) {
+        return "He's currently learning AWS, DevOps, and Python to expand his cloud and automation skills.";
+      }
+
+      if (input.match(/education|study|background|degree|college/)) {
+        return "Abdul has a strong computer science background with a focus on full-stack development.";
+      }
+
+      if (input.match(/soft skills|communication|problem solving|teamwork/)) {
+        return "He's known for great communication, teamwork, and continuous learning — always improving his craft.";
+      }
+
+      if (input.match(/contact|reach|linkedin|email|connect/)) {
+        return "You can contact Abdul Kalam through the portfolio's contact section, or find him on LinkedIn and GitHub.";
+      }
+
+      if (input.match(/thank|thanks|thank you/)) {
+        return "You're welcome! 😊 Always happy to help.";
+      }
+
+      if (input.match(/bye|goodbye|see you/)) {
+        return "Goodbye 👋 Hope to chat again soon!";
+      }
+
+      return "Hmm 🤔 I'm not sure about that. Try asking about Abdul Kalam's projects, skills, or experience!";
+    }
+
+    // EmailJS
+    (function(){
+      emailjs.init("kXpuhIPSIJ4LGHuPC");
+    })();
+
+    document.querySelector(".contact-form").addEventListener("submit", function(e) {
+      e.preventDefault();
+      emailjs.sendForm('service_w16twrv', 'template_h9giymg', this)
+        .then(() => {
+          alert('✅ Message sent successfully!');
+          this.reset();
+        })
+        .catch((error) => {
+          console.error('EmailJS Error:', error);
+          alert('❌ Failed to send message. Please try again.');
+        });
+    });
+  </script>
+</body>
+</html>
