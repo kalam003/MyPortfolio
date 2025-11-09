@@ -4,21 +4,9 @@
     {
       "src": "*.html",
       "use": "@vercel/static"
-    },
-    {
-      "src": "*.png",
-      "use": "@vercel/static"
-    },
-    {
-      "src": "*.pdf", 
-      "use": "@vercel/static"
     }
   ],
   "routes": [
-    {
-      "src": "/(.*\\.(png|jpg|jpeg|gif|pdf))",
-      "dest": "/$1"
-    },
     {
       "src": "/(.*)",
       "dest": "/Home.html"
