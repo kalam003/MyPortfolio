@@ -17,6 +17,9 @@
   "routes": [
     {
       "src": "/(.*\\.(png|jpg|jpeg|gif|pdf|ico|svg))",
+      "headers": {
+        "Cache-Control": "public, max-age=86400"
+      },
       "dest": "/$1"
     },
     {
