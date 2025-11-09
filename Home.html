@@ -1277,20 +1277,6 @@
     });
   </script>
 
-  <script>
-// Add this to check if image loads
-window.addEventListener('load', function() {
-  const img = document.querySelector('.home_picture img');
-  img.onerror = function() {
-    console.error('Image failed to load:', this.src);
-    // Show a placeholder if image fails
-    this.alt = 'Image not found';
-    this.style.border = '2px solid red';
-  };
-  img.onload = function() {
-    console.log('Image loaded successfully:', this.src);
-  };
-});
-</script>
+  
 </body>
 </html>
